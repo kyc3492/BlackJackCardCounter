@@ -10,4 +10,4 @@ Project for Software Engineering lecture
 
 쏘웨공은 Life Cycle까지, Project Management(?) 안들어감.
 
-일해라 
+일해라 노예들아
