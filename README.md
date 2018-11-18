@@ -12,3 +12,5 @@ Project for Software Engineering lecture
 
 일해라 노예들아
 https://kyc3492.github.io/BlackJackCardCounter/
+
+게임을 시작하도록 
