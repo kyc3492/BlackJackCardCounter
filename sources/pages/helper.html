@@ -6,7 +6,51 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+<style>
+    .arrow_box {
+        position: relative;
+        top: 0px;
+        left: 0px;
+        background: #ffffff;
+        border: 2px solid #7a7a7a;
+        border-radius: 5px;
+        height: 100px;
+        width: 200px;
+        display: table;
+        font-size: 30pt;
+        text-align: center;
+    }
+    .arrow_box:after, .arrow_box:before {
+        right: 100%;
+        top: 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+    }
+
+    .arrow_box:after {
+        border-color: rgba(255, 255, 255, 0);
+        border-right-color: #ffffff;
+        border-width: 10px;
+        margin-top: -30px;
+    }
+    .arrow_box:before {
+        border-color: rgba(122, 122, 122, 0);
+        border-right-color: #7a7a7a;
+        border-width: 13px;
+        margin-top: -33px;
+    }
+    .arrow_box span{
+        display: table-cell;
+        vertical-align: middle;
+    }
+</style>
 <body>
-    <h1>Hello from helper.html</h1>
+    <div class="arrow_box">
+        <span>HIT!!</span>
+    </div>
 </body>
 </html>
