@@ -20,3 +20,7 @@ https://kyc3492.github.io/BlackJackCardCounter/
 기초 틀을 짜봤다
 
 파일 왤케 다 나와있냐 다시 넣음
+
+# 2018.11.20
+
+각 프레임의 링크 수정
