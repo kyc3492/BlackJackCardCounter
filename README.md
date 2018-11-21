@@ -26,3 +26,9 @@ https://kyc3492.github.io/BlackJackCardCounter/
 각 프레임의 링크 수정
 
 helper.html 꾸며봄
+
+# 2018.11.21
+
+helper.html의 테스트 메시지 버튼 생성
+
+index.html 프레임 간격 삭제 및 스크롤바 생성
