@@ -1,144 +1,70 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            //$("#game").load("sources/pages/game.html");
-            $("#helper").load("sources/pages/helper.html");
-            $("#counter").load("sources/pages/counter.html");
-        });
-    </script>
-    <!--각 부분의 배경색은 여기서 조정해야 합니다. 제 부족한 지식을 탓하십시오 ㅜㅜ.-->
-    <style>
-            #container {
-              width: 1080px;
-              margin: 10px auto;
-            
-            }
-            #helper {
-              width: 270px;
-              height: 650px;
-              margin-bottom: 20px;
-              float: left;
-              border: 1px solid #bcbcbc;
-              
-            }
-            #game {
-              width: 540px;
-              height: 650px;
-              padding: 20px;
-			  float: left;
-              border: 1px solid #bcbcbc;
-			  background-color: #3a536c;
-			  text-align: center;
-            }
-            #counter {
-              width: 270px;
-              height: 650px;
-              margin-bottom: 20px;
-              float: right;
-              border: 1px solid #bcbcbc;
-            }
-            #footer {
-                height: 50px;
-                clear: both;
-                padding: 20px;
-                border: 1px solid #bcbcbc;
-            }
-            @media ( max-width: 720px ) {
-              #container {
-                width: auto;
-              }
-              #helper {
-                float: none;
-                width: auto;
-              }
-              #game {
-                float: none;
-                width: auto;
-              }
-              #counter {
-                float: none;
-                width: auto;
-              }
-            }
-			
-			.game_button {
-				width: 70px;
-				background-color: white;
-				border: none;
-				border-radius: 3px;
-				color: black;
-				font-size: 14px;
-				margin-right: 4px;
-				margin-top: 365px;
-			}
-			
-			.game_button:hover {
-				box-shadow: 0 12px 12px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-			}
-			
-			.bet_plus {
-			width: 40px;
-			height: 27px;
-			background-color: #cccccc;
-			border: none;
-			border-radius: 4px;
-			color: black;
-			font-size: 14px;
-			margin-left: 5px;
-			margin-top: 5px;
-			float: right;
-			}
-			
-			.bet_minus {
-			width: 40px;
-			height: 27px;
-			background-color: #cccccc;
-			border: none;
-			border-radius: 4px;
-			color: black;
-			font-size: 14px;
-			margin-right: 5px;
-			margin-top: 5px;
-			float: left;
-			}
-			
-    </style>
+<title>Blackjack Game</title>
+<link href="style.css" rel="stylesheet">
+<script src="js/jquery.js"></script>
+<script src="js/blackjack.js"></script>
 </head>
 <body>
-    <div id="container">
-        <div id="helper" style="overflow:auto; width:270px; height:650px;"></div>
-        <div id="game">
-            <p style="color: #f6c6c6; font-size: 16px; margin-top: 30px">Dealer</p>
-			
-			<input type="button" class="game_button" value="DoubleD">
-			<input type="button" class="game_button" value="Hit">
-			<input type="button" class="game_button" value="Stand">
-			<input type="button" class="game_button" value="Split">
-			
-			<p style="color: white; font-size: 16px; margin-top: 17px">Your Bet</p>
-			
-			<input type="text" style="width: 100px; height: 30px">
-			<input type="button" class="bet_plus" value="+100">
-			<input type="button" class="bet_plus" value="+10">
-			<input type="button" class="bet_plus" value="+1">
-			<input type="button" class="bet_minus" value="-100">
-			<input type="button" class="bet_minus" value="-10">
-			<input type="button" class="bet_minus" value="-1">
-			
-			
+	<div class='page'>
+	<div style="text-align: center; padding-top: 15px; margin-left: 60px;">
+	  <iframe src="https://ghbtns.com/github-btn.html?user=tonyspiro&repo=blackjack&type=star&count=true" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+	</div>
+        <div class='dealer-cards'>
+            
+            <div class='card card1'></div>
+            
+            <div class='card flipped card2'></div>
+            
+            <div class='new-cards'></div>
+            
+            <div class='clear'></div>
+            
+            <div id='dealerTotal' class='dealer-total'></div>
+            
         </div>
-        <div id="counter"></div>
-        <div id="footer">
-                <p>Copyright by us</p>
+        
+        <div class='clear'></div>
+        
+        <div class='player-cards'>
+            
+            <div class='card card1'></div>
+            
+            <div class='card card2'></div>
+        	
+            <div class='new-cards'></div>
+            
+        	<div class='clear'></div>
+            
+            <div id='playerTotal' class='player-total'></div>
+            
+            
         </div>
+        
+        <div class='buttons'>
+        	<div class='btn' id='hit'>Hit</div>
+        	<div class='btn' id='stand'>Stand</div>
+    	</div>
+    	<div class='betting-area'>
+    		<b>Your Bet</b><br />
+    		<div id='bet' class='bet money'>0</div>
+    		
+    		<div>
+        		<div class='btn' id='more'>+</div>
+        		<div class='btn' id='less'>-</div>
+	    	</div>
+    		<div class='clear'></div>
+    	</div>
+    	<div>
+    		<b>Available Funds</b><br />
+    		<span id='money' class='money'>500</span>
+    		<div class='clear'></div>
+    	</div> 
+        
+        <div class='clear'></div>
+        
+        <div id='message' class='message'></div>   
     </div>
 </body>
-</html>
+</html> 
