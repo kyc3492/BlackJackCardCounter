@@ -6,11 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script>
-        var count = 0;
-
         $(function() {
             $('.send_message_simulation').click(function() {
-                $(".message_area").append("<div class='arrow_box'><span>HIT!!" + count++ + "</span></div>");
+                $(".message_area").append("<div class='arrow_box'><span>HIT!!</span></div>");
             });
         });
     </script>
@@ -28,8 +26,7 @@
         display: table;
         font-size: 30pt;
         text-align: center;
-        margin-top: 10px;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
     }
     .arrow_box:after, .arrow_box:before {
         right: 100%;
@@ -58,17 +55,10 @@
         display: table-cell;
         vertical-align: middle;
     }
-    .banner {
-        height: 50px;
-        width: 270px;
-        background-color: #f1d9d8;
-    }
 </style>
 <body>
     <div class="message_area">
-        <div class="banner">
-            <button class="send_message_simulation">SEND HIT</button>
-        </div>
+        <button class="send_message_simulation">SEND HIT</button>
     </div>
 </body>
 </html>
