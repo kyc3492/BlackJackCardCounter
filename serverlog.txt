@@ -1,0 +1,155 @@
+$ git remote -v
+heroku ps:scale web=1
+
+c:\j>git add .
+
+c:\j>git commit -m "fuck"
+[master ecc32e3] fuck
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+c:\j>git push heroku master
+Counting objects: 3, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 294 bytes | 147.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0)
+remote: Compressing source files... done.
+remote: Building source:
+remote:
+remote: -----> Node.js app detected
+remote:
+remote: -----> Creating runtime environment
+remote:
+remote:        NPM_CONFIG_LOGLEVEL=error
+remote:        NODE_ENV=production
+remote:        NODE_MODULES_CACHE=true
+remote:        NODE_VERBOSE=false
+remote:
+remote: -----> Installing binaries
+remote:        engines.node (package.json):  10.13.0
+remote:        engines.npm (package.json):   6.4.1
+remote:
+remote:        Resolving node version 10.13.0...
+remote:        Downloading and installing node 10.13.0...
+remote:        npm 6.4.1 already installed with node
+remote:
+remote: -----> Restoring cache
+remote:        - node_modules is checked into source control and cannot be cached
+remote:
+remote: -----> Building dependencies
+remote:        Prebuild detected (node_modules already exists)
+remote:        Rebuilding any native modules
+remote:        express@4.16.4 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/express
+remote:        accepts@1.3.5 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/accepts
+remote:        mime-types@2.1.21 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/mime-types
+remote:        mime-db@1.37.0 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/mime-db
+remote:        negotiator@0.6.1 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/negotiator
+remote:        array-flatten@1.1.1 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/array-flatten
+remote:        body-parser@1.18.3 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/body-parser
+remote:        bytes@3.0.0 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/bytes
+remote:        content-type@1.0.4 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/content-type
+remote:        debug@2.6.9 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/body-parser/node_modules/debug
+remote:        ms@2.0.0 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/ms
+remote:        depd@1.1.2 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/depd
+remote:        http-errors@1.6.3 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/http-errors
+remote:        inherits@2.0.3 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/inherits
+remote:        setprototypeof@1.1.0 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/setprototypeof
+remote:        statuses@1.4.0 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/statuses
+remote:        iconv-lite@0.4.23 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/iconv-lite
+remote:        safer-buffer@2.1.2 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/safer-buffer
+remote:        on-finished@2.3.0 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/on-finished
+remote:        ee-first@1.1.1 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/ee-first
+remote:        qs@6.5.2 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/qs
+remote:        raw-body@2.3.3 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/raw-body
+remote:        unpipe@1.0.0 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/unpipe
+remote:        type-is@1.6.16 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/type-is
+remote:        media-typer@0.3.0 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/media-typer
+remote:        content-disposition@0.5.2 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/content-disposition
+remote:        cookie@0.3.1 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/cookie
+remote:        cookie-signature@1.0.6 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/cookie-signature
+remote:        debug@2.6.9 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/express/node_modules/debug
+remote:        encodeurl@1.0.2 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/encodeurl
+remote:        escape-html@1.0.3 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/escape-html
+remote:        etag@1.8.1 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/etag
+remote:        finalhandler@1.1.1 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/finalhandler
+remote:        debug@2.6.9 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/finalhandler/node_modules/debug
+remote:        parseurl@1.3.2 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/parseurl
+remote:        fresh@0.5.2 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/fresh
+remote:        merge-descriptors@1.0.1 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/merge-descriptors
+remote:        methods@1.1.2 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/methods
+remote:        path-to-regexp@0.1.7 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/path-to-regexp
+remote:        proxy-addr@2.0.4 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/proxy-addr
+remote:        forwarded@0.1.2 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/forwarded
+remote:        ipaddr.js@1.8.0 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/ipaddr.js
+remote:        range-parser@1.2.0 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/range-parser
+remote:        safe-buffer@5.1.2 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/safe-buffer
+remote:        send@0.16.2 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/send
+remote:        debug@2.6.9 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/send/node_modules/debug
+remote:        destroy@1.0.4 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/destroy
+remote:        mime@1.4.1 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/mime
+remote:        serve-static@1.13.2 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/serve-static
+remote:        utils-merge@1.0.1 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/utils-merge
+remote:        vary@1.1.2 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/vary
+remote:        socket.io@2.1.1 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/socket.io
+remote:        debug@3.1.0 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/debug
+remote:        engine.io@3.2.1 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/engine.io
+remote:        base64id@1.0.0 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/base64id
+remote:        engine.io-parser@2.1.3 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/engine.io-parser
+remote:        after@0.8.2 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/after
+remote:        arraybuffer.slice@0.0.7 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/arraybuffer.slice
+remote:        base64-arraybuffer@0.1.5 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/base64-arraybuffer
+remote:        blob@0.0.5 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/blob
+remote:        has-binary2@1.0.3 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/has-binary2
+remote:        isarray@2.0.1 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/isarray
+remote:        ws@3.3.3 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/ws
+remote:        async-limiter@1.0.0 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/async-limiter
+remote:        ultron@1.1.1 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/ultron
+remote:        socket.io-adapter@1.1.1 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/socket.io-adapter
+remote:        socket.io-client@2.1.1 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/socket.io-client
+remote:        backo2@1.0.2 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/backo2
+remote:        component-bind@1.0.0 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/component-bind
+remote:        component-emitter@1.2.1 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/component-emitter
+remote:        engine.io-client@3.2.1 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/engine.io-client
+remote:        component-inherit@0.0.3 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/component-inherit
+remote:        has-cors@1.1.0 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/has-cors
+remote:        indexof@0.0.1 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/indexof
+remote:        parseqs@0.0.5 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/parseqs
+remote:        better-assert@1.0.2 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/better-assert
+remote:        callsite@1.0.0 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/callsite
+remote:        parseuri@0.0.5 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/parseuri
+remote:        xmlhttprequest-ssl@1.5.5 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/xmlhttprequest-ssl
+remote:        yeast@0.1.2 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/yeast
+remote:        object-component@0.0.3 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/object-component
+remote:        socket.io-parser@3.2.0 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/socket.io-parser
+remote:        to-array@0.1.4 /tmp/build_20545d78127718ecac60740e8878b79f/node_modules/to-array
+remote:        Installing any new modules (package.json)
+remote:        audited 202 packages in 1.484s
+remote:        found 0 vulnerabilities
+remote:
+remote:
+remote: -----> Caching build
+remote:        - node_modules
+remote:
+remote: -----> Pruning devDependencies
+remote:        audited 202 packages in 1.409s
+remote:        found 0 vulnerabilities
+remote:
+remote:
+remote: -----> Build succeeded!
+remote: -----> Discovering process types
+remote:        Procfile declares types     -> (none)
+remote:        Default types for buildpack -> web
+remote:
+remote: -----> Compressing...
+remote:        Done: 19.1M
+remote: -----> Launching...
+remote:        Released v11
+remote:        https://dohyunkim.herokuapp.com/ deployed to Heroku
+remote:
+remote: Verifying deploy... done.
+To https://git.heroku.com/dohyunkim.git
+   513eafc..ecc32e3  master -> master
+
+c:\j>heroku open
+https://dohyunkim.herokuapp.com/
+

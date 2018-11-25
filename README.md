@@ -32,3 +32,13 @@ helper.html 꾸며봄
 helper.html의 테스트 메시지 버튼 생성
 
 index.html 프레임 간격 삭제 및 스크롤바 생성
+
+# 2018.11.25
+
+blackjack hosting test
+
+기존 파일은 backup folder에
+
+
+https://dohyunkim.herokuapp.com
+
