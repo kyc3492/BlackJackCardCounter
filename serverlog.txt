@@ -1,3 +1,6 @@
+$ git remote -v
+heroku ps:scale web=1
+
 c:\j>git add .
 
 c:\j>git commit -m "fuck"
@@ -148,3 +151,5 @@ To https://git.heroku.com/dohyunkim.git
    513eafc..ecc32e3  master -> master
 
 c:\j>heroku open
+https://dohyunkim.herokuapp.com/
+
