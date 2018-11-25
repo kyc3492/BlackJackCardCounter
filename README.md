@@ -35,6 +35,9 @@ index.html 프레임 간격 삭제 및 스크롤바 생성
 
 # 2018.11.25
 
+##백엔드
+------
+
 blackjack hosting test
 
 기존 파일은 backup folder에
@@ -42,3 +45,9 @@ blackjack hosting test
 
 https://dohyunkim.herokuapp.com
 
+##프론트엔드
+---------
+
+채은 파일과 병합작업 진행
+
+DoubleD와 split 삭제 예정

@@ -9,7 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
-            //$("#game").load("sources/pages/game.html");
+            $("#game").load("sources/pages/game.html");
             $("#helper").load("sources/pages/helper.html");
             $("#counter").load("sources/pages/counter.html");
         });
@@ -114,27 +114,8 @@
 </head>
 <body>
     <div id="container">
-        <div id="helper" style="overflow:auto; width:270px; height:650px;"></div>
-        <div id="game">
-            <p style="color: #f6c6c6; font-size: 16px; margin-top: 30px">Dealer</p>
-			
-			<input type="button" class="game_button" value="DoubleD">
-			<input type="button" class="game_button" value="Hit">
-			<input type="button" class="game_button" value="Stand">
-			<input type="button" class="game_button" value="Split">
-			
-			<p style="color: white; font-size: 16px; margin-top: 17px">Your Bet</p>
-			
-			<input type="text" style="width: 100px; height: 30px">
-			<input type="button" class="bet_plus" value="+100">
-			<input type="button" class="bet_plus" value="+10">
-			<input type="button" class="bet_plus" value="+1">
-			<input type="button" class="bet_minus" value="-100">
-			<input type="button" class="bet_minus" value="-10">
-			<input type="button" class="bet_minus" value="-1">
-			
-			
-        </div>
+        <div id="helper" style="overflow-y: auto; overflow-x: hidden;"></div>
+        <div id="game"></div>
         <div id="counter"></div>
         <div id="footer">
                 <p>Copyright by us</p>
