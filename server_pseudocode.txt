@@ -1,0 +1,96 @@
+var socketio = require('socket.io');
+var express = require('express');
+var http = require('http');
+var fs = require('fs');
+var app = express();
+var server = http.createServer(app);
+
+
+app.get('/', function (request, response, next) {
+    fs.readFile('HTMLPage.html', function (error, data) {
+        response.send(data.toString());
+    });
+});
+
+
+server.listen(PORT, function () {
+    console.log('Server Running');
+});
+
+
+//수도코드, 안돌아감
+
+global deck = card *3;
+usedcard = [];
+
+/*
+data
+{
+1)card[ player[], dealer[] ];
+2)남은 잔액 fund = 1000;
+3)bet = 플레이어가 적어냄
+4)카드 카운팅 정보;
+} 이거를 class 비스무리한걸로 묶어서 전송
+*/
+
+
+var io = socketio.listen(server);
+var bj = require('./js/blackjack.js');
+deck.shuffle();
+
+io.sockets.on('connection', function (socket) {
+    socket.on('game_start', function(bet){   
+        client_card = bj.start_game(); // client_card = [dealer_card[], player_card[]]
+        usedcard += client_card;
+        deck -= usedcard;
+
+        data.counting_info = bj.cardcounting(usedcard);
+        data.card = client_card;
+        data.fund = data.fund - bet
+        data.bet = bet
+
+        io.sockets.emit('game_start', data);
+    });
+
+    socket.on('hit', function(data){
+        draw_card = deck.drawscard();
+        usedcard += draw_card;
+        deck -= draw_card;
+        
+        client_card.player += draw_card;
+        
+        data.counting_info = bj.cardcounting(usedcard);
+        data.card = client_card;
+        
+        io.sockets.emit('hit', data);
+    });
+
+    socket.on('dealer', function(data){
+        draw_card = deck.drawscard();
+        usedcard += draw_card;
+        deck -= draw_card;
+        
+        client_card.dealer += draw_card;
+        
+        data.counting_info = bj.cardcounting(usedcard);
+        data.card = client_card;
+        
+        io.sockets.emit('dealer', data);
+    
+    });
+
+
+    socket.on('win', function(data){
+        data.fund = data.bet * 2;
+        data.bet = 0;
+        io.sockets.emit('dealer', data);
+    });
+
+    socket.on('blackjack', function(data){
+        data.fund = data.bet * 2.5;
+        data.bet = 0;
+        io.sockets.emit('dealer', data);
+    });
+    
+    
+});
