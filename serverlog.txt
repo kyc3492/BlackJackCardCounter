@@ -1,5 +1,11 @@
 $ git remote -v
+
+heroku  https://git.heroku.com/dohyunkim.git (fetch)
+heroku  https://git.heroku.com/dohyunkim.git (push)
+
 heroku ps:scale web=1
+Scaling dynos... done, now running web at 1:Free
+
 
 c:\j>git add .
 
