@@ -43,8 +43,8 @@ blackjack hosting test
 기존 파일은 backup folder에
 
 
-https://dohyunkim.herokuapp.com << 폐쇄합니다
-https://herokuserverinfo.herokuapp.com/ <<chatserver 돌리고있음 채팅가능 
+https://chatserverinfo.herokuapp.com/
+
 
 
 ##프론트엔드
