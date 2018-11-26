@@ -5,6 +5,8 @@ var fs = require('fs');
 var app = express();
 var server = http.createServer(app);
 
+app.use('/js',express.static(__dirname + "/js"));
+app.use('/css',express.static(__dirname + "/css"));
 
 app.get('/', function (request, response, next) {
     fs.readFile('HTMLPage.html', function (error, data) {
@@ -18,7 +20,7 @@ server.listen(PORT, function () {
 });
 
 
-//¼öµµÄÚµå, ¾Èµ¹¾Æ°¨
+//ìˆ˜ë„ì½”ë“œ, ì•ˆëŒì•„ê°
 
 global deck = card *3;
 usedcard = [];
@@ -27,10 +29,10 @@ usedcard = [];
 data
 {
 1)card[ player[], dealer[] ];
-2)³²Àº ÀÜ¾× fund = 1000;
-3)bet = ÇÃ·¹ÀÌ¾î°¡ Àû¾î³¿
-4)Ä«µå Ä«¿îÆÃ Á¤º¸;
-} ÀÌ°Å¸¦ class ºñ½º¹«¸®ÇÑ°É·Î ¹­¾î¼­ Àü¼Û
+2)ë‚¨ì€ ì”ì•¡ fund = 1000 ì´ˆê¸°ê°’;
+3)bet = í”Œë ˆì´ì–´ê°€ ì ì–´ëƒ„
+4)ì¹´ë“œ ì¹´ìš´íŒ… ì •ë³´;
+} ì´ê±°ë¥¼ class ë¹„ìŠ¤ë¬´ë¦¬í•œê±¸ë¡œ ë¬¶ì–´ì„œ ì „ì†¡
 */
 
 
@@ -94,3 +96,12 @@ io.sockets.on('connection', function (socket) {
     
     
 });
+
+
+/*
+fundê°’ DBë¡œ ì €ì¥ í›„ ë¡œê·¸ì¸ ì‹œ ë¶ˆëŸ¬ì˜´
+crypto ëª¨ë“ˆ createHash('sha512')ë¡œ ì•”í˜¸í™”
+multiplay??
+*/
+
+
