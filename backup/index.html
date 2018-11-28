@@ -14,7 +14,7 @@
             $("#counter").load("sources/pages/counter.html");
         });
     </script>
-    <!--각 부분의 배경색은 여기서 조정해야 합니다. 제 부족한 지식을 탓하십시오 ㅜㅜ.-->
+
     <style>
             #container {
               width: 1080px;
@@ -38,6 +38,8 @@
 			  background-color: #3a536c;
 			  text-align: center;
             }
+			
+			
             #counter {
               width: 270px;
               height: 650px;
@@ -46,8 +48,8 @@
               border: 1px solid #bcbcbc;
             }
             #footer {
-                height: 50px;
                 clear: both;
+				height: 50px;
                 padding: 20px;
                 border: 1px solid #bcbcbc;
             }
@@ -69,54 +71,19 @@
               }
             }
 			
-			.game_button {
-				width: 70px;
-				background-color: white;
-				border: none;
-				border-radius: 3px;
-				color: black;
-				font-size: 14px;
-				margin-right: 4px;
-				margin-top: 365px;
-			}
-			
-			.game_button:hover {
-				box-shadow: 0 12px 12px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-			}
-			
-			.bet_plus {
-			width: 40px;
-			height: 27px;
-			background-color: #cccccc;
-			border: none;
-			border-radius: 4px;
-			color: black;
-			font-size: 14px;
-			margin-left: 5px;
-			margin-top: 5px;
-			float: right;
-			}
-			
-			.bet_minus {
-			width: 40px;
-			height: 27px;
-			background-color: #cccccc;
-			border: none;
-			border-radius: 4px;
-			color: black;
-			font-size: 14px;
-			margin-right: 5px;
-			margin-top: 5px;
-			float: left;
-			}
-			
     </style>
 </head>
 <body>
     <div id="container">
-        <div id="helper" style="overflow-y: auto; overflow-x: hidden;"></div>
-        <div id="game"></div>
-        <div id="counter"></div>
+        <div id="helper" style="overflow-x: hidden; overflow-y: auto; width: 270px; height: 650px;">
+		<!--헬퍼 상단 분홍 바 부분임. 연철이가 본인 helper.html 코드에 추가 바람--> 
+			<div style="width: 270px; height: 50px; background-color: #f6c6c6">
+			</div> 
+        </div>
+        <div id="game"> 
+        </div>
+        <div id="counter" style="overflow-x: hidden; overflow-y: auto; width: 270px; height: 650px">
+        </div>
         <div id="footer">
                 <p>Copyright by us</p>
         </div>

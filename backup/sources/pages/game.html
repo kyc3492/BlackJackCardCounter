@@ -5,21 +5,41 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	
+	<!--베팅금 조절 버튼 동작-->
+	<script>
+	
+	
+	function bet_plus(num) {
+		var new_bet = parseInt(document.getElementById("your_bet").value) + parseInt(num);
+		document.getElementById("your_bet").value = new_bet;
+	}
+	function bet_minus(num) {
+		var new_bet = parseInt(document.getElementById("your_bet").value) - parseInt(num);
+		document.getElementById("your_bet").value = new_bet;
+	}
+	
+	function bet() {
+		var your_bet = parseInt(document.getElementById("your_bet").value);
+		var available_funds = parseInt(document.getElementById("available_funds").innerHTML) - your_bet;
+		document.getElementById("available_funds").innerHTML = available_funds;
+		alert("당신이 베팅한 금액은 $" + your_bet + " 이고, 남은 자금은 $" + available_funds + " 입니다.");
+	}
+	</script>
 	<title>Game.html</title>
 	
 	<!--게임 버튼, 베팅금 조절 버튼 스타일-->
 	<style>
 	
 	.game_button {
-				width: 70px;
+				width: 60px;
 				background-color: white;
 				border: none;
 				border-radius: 3px;
 				color: black;
 				font-size: 14px;
 				margin-right: 4px;
-				margin-top: 10px;
+				margin-top: 5px;
 			}
 			
 			.game_button:hover {
@@ -28,33 +48,38 @@
 			}
 			
 			.bet_plus {
-			width: 40px;
-			height: 22px;
-			background-color: #cccccc;
-			border: none;
-			border-radius: 4px;
-			color: black;
-			font-size: 14px;
-			margin-left: 2px;
-			margin-top: 5px;
+				width: 40px;
+				height: 22px;
+				background-color: #cccccc;
+				border: none;
+				border-radius: 4px;
+				color: black;
+				font-size: 14px;
+				margin-left: 2px;
+				margin-top: 5px;
 			}
 			
 			.bet_minus {
-			width: 40px;
-			height: 22px;
-			background-color: #cccccc;
-			border: none;
-			border-radius: 4px;
-			color: black;
-			font-size: 14px;
-			margin-right: 2px;
-			margin-top: 5px;
+				width: 40px;
+				height: 22px;
+				background-color: #cccccc;
+				border: none;
+				border-radius: 4px;
+				color: black;
+				font-size: 14px;
+				margin-right: 2px;
+				margin-top: 5px;
 			}
 			
 			.bet_plus:hover, .bet_minus:hover {
-			background-color: #f6c6c6
+				background-color: #f6c6c6;
+				box-shadow: 0 12px 12px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 			}
 	
+		#bet_button:hover {
+		box-shadow: 0 12px 12px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+		}
+		
 	</style>
 </head>
 <body>
@@ -65,43 +90,53 @@
 	<!--카드 이미지 넣을 2x2 테이블-->
 		<table style="margin: auto; width: 240px; height: 300px; border: 1px solid">
 		<tr>
-		<td><img src="sources/images/c1.jpg" style="width: 110px; height: 140px"></td>
-		<td><img src="sources/images/c1.jpg" style="width: 110px; height: 140px"></td>
-		</tr>
-		<tr>
-		<td><img src="sources/images/c1.jpg" style="width: 110px; height: 140px"></td>
-		<td><img src="sources/images/c1.jpg" style="width: 110px; height: 140px"></td>
+			<td><img src="sources/images/cards/c1.jpg" style="width: 110px; height: 140px"></td>
+			<td><img src="sources/images/cards/c1.jpg" style="width: 110px; height: 140px"></td>
+			</tr>
+			<tr>
+			<td><img src="sources/images/cards/c1.jpg" style="width: 110px; height: 140px"></td>
+			<td><img src="sources/images/cards/c1.jpg" style="width: 110px; height: 140px"></td>
 		</tr>
 		</table>
 			
 	<!--현재 카드 숫자 합을 표시해줄 텍스트 부분-->
-		<p style="color: #f6c6c6; font-size: 16px; margin-top: 10px">Sum</p>
+	<div>
+		<p style="color: #f6c6c6; font-size: 16px; margin-top: 10px" id="sum">Sum</p>
 			
 	<!--게임 버튼-->
-		<input type="button" class="game_button" value="DoubleD">
 		<input type="button" class="game_button" value="Hit">
 		<input type="button" class="game_button" value="Stand">
-		<input type="button" class="game_button" value="Split">
-			
+	</div>
+	
 	<!--베팅금 조절 부분-->
-		<p style="color: white; font-size: 16px; margin-top: 17px">Your Bet</p>
-		<input type="text" style="width: 100px; height: 30px; float: center">
+	<div style="float: right; height: 100px; width: 33%; padding-top: 5px; padding-left: 14px; padding-right: 14px">
+		<legend style="font-size: 30px; color: white; text-align: center; margin-bottom: 1px">+</legend>
+		<input type="submit" class="bet_plus" value="1" onclick="bet_plus(this.value)">
+		<input type="submit" class="bet_plus" value="10" onclick="bet_plus(this.value)">
+		<input type="submit" class="bet_plus" value="100" onclick="bet_plus(this.value)">
+	</div>
 		
-		<div style="float: right; margin-right: 60px">
-		<input type="button" class="bet_plus" value="+1">
-		<input type="button" class="bet_plus" value="+10">
-		<input type="button" class="bet_plus" value="+100">
-		</div>
-		<div style="float: left; margin-left: 60px">
-		<input type="button" class="bet_minus" value="-100">
-		<input type="button" class="bet_minus" value="-10">
-		<input type="button" class="bet_minus" value="-1">
-		</div>
+	<div style="float: right; height: 100px; width: 33%; padding-top: 20px">
+		<p style="color: white; font-size: 16px; margin: auto; width: 100px">Your Bet</p>
+		<input type="text" id="your_bet" style="width: 100px; height: 30px; margin-top: 5px">
+	</div>
+		
+	<div style="float: right; height: 100px; width: 33%; padding-top: 5px; padding-left: 14px; padding-right: 14px">
+		<legend style="font-size: 30px; color: white; text-align: center; margin-bottom: 1px">-</legend>
+		<input type="submit" class="bet_minus" value="100" onclick="bet_minus(this.value)">
+		<input type="submit" class="bet_minus" value="10" onclick="bet_minus(this.value)">
+		<input type="submit" class="bet_minus" value="1" onclick="bet_minus(this.value)">
+	</div>
+	
+	<div>
+		<img src="sources/images/button.png" id="bet_button" style="width: 80px; height: 30px" onclick="bet()">
+	</div>
 	
 	<!--현재 남아있는 자금 표시해주는 부분-->
-		<p style="color: white; font-size: 16px; margin-top: 17px">Available Funds</p>
-		<p style="color: #bfece3; font-size: 16px; margin-top:5px">1000</p>
-			
+	<div style="margin-top: 5px">
+		<span style="color: white; font-size: 16px">Available Funds</span>
+		<b style="color: #bfece3; font-size: 16px" id="available_funds">1000</b>
+	<div>
 
 	
 </body>

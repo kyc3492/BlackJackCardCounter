@@ -1,24 +1,29 @@
+<!--banner 클래스에서 배너 위치 고정 + 맨 앞으로 보이게 하기 추가
+    z-index: 더 큰 숫자가 더 앞으로 나옴. 작은 숫자부터 먼저 표시된다고 생각하면 됨.
+    기본값은 1이라 2라고만 해줘도 앞으로 나오게 된다.-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <title>Document</title>
+    
     <script>
         var count = 0;
-
-        $(function() {
-            $('.send_message_simulation').click(function() {
-                $(".message_area").append("<div class='arrow_box'><span>HIT!!" + count++ + "</span></div>");
-            });
-        });
+        function sendTestMessage() {
+            $("#message_area").append("<div class='arrow_box'><span>HIT!! " + count++ + "</span></div>");
+            $("#message_area").scrollTop(1000);
+            //alert($('#message_area').scrollTop());
+        }
     </script>
 </head>
 <style>
     .arrow_box {
         position: relative;
-        top: 0px;
+        top: 50px;
         left: 20px;
         background: #ffffff;
         border: 2px solid #7a7a7a;
@@ -58,13 +63,20 @@
         display: table-cell;
         vertical-align: middle;
     }
+    .banner{
+        width: 270px;
+        height: 50px;
+        background-color: #f6c6c6;
+        padding: 13px; 
+        position: fixed;
+        z-index: 2;
+    }
 </style>
 <body>
-    <div class="message_area">
-        <div style="width: 270px; height: 50px; background-color: #f6c6c6; padding: 13px">
-            <p style="color: #34495e; font-size: 16px; text-align: center">Helper</p>
-        </div>    
-        <button class="send_message_simulation">SEND HIT</button>
+    <div class="banner">
+        <p style="color: #34495e; font-size: 16px; text-align: center">Helper</p>
+        <button class="send_message_simulation" onclick="sendTestMessage()">SEND HIT</button>
     </div>
+    <div id="message_area"></div>
 </body>
 </html>

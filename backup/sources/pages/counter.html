@@ -5,16 +5,84 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<title>Couter.html</title>
+	
+	<script>
+	
+	
+	
+	 var count2 = 0;
+
+        function ListofUsedCards() {
+            $("#counter_area").append("<div class='counter_box'><span>HIT!! " + count2++ + "</span></div>");
+            $("html").scrollTop($("html")[0].scrollHeight);
+			
+        }
+
+	</script>
+	
+	<style>
+	
+	.counter_box {
+        background: #cccccc;
+        border-radius: 5px;
+        height: 300px;
+        width: 200px;
+        display: table;
+        font-size: 14px;
+        text-align: center;
+		margin-top: 3px;
+    }
+    .counter_box:after, .counter_box:before {
+        right: 100%;
+        top: 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+    }
+
+    .counter_box:after {
+        border-color: rgba(255, 255, 255, 0);
+        border-right-color: #ffffff;
+        border-width: 10px;
+        margin-top: -30px;
+    }
+    .counter_box:before {
+        border-color: rgba(122, 122, 122, 0);
+        border-right-color: #7a7a7a;
+        border-width: 13px;
+        margin-top: -33px;
+    }
+    .counter_box span{
+        display: table-cell;
+        vertical-align: middle;
+    }
+    .banner{
+        width: 270px;
+        height: 50px;
+        background-color: #f6c6c6;
+        padding: 13px; 
+        position: fixed;
+        z-index: 2;
+    }
+	
+	</style>
+	
 </head>
 <body>
 
 	<!--상단 분홍 바-->
-    <div style="width: 270px; height: 50px; background-color: #f6c6c6; padding: 13px">
+    <div class="banner">
 		<p style="color: #34495e; font-size: 16px; text-align: center">List of Used Cards</p>
+		<button class="send_message_simulation" onclick="ListofUsedCards()">SEND HIT</button>
 	</div>
-
+	
+	<!--카드 목록 뜨는 부분-->
+	<div id="counter_area" style="margin-top: 50px; padding: 30px; overflow: auto"></div>
 	
 </body>
 </html>
