@@ -14,8 +14,8 @@
     <script>
         var count = 0;
         function sendTestMessage() {
-            $("#message_area").append("<div class='arrow_box'><span>HIT!! " + count++ + "</span></div>");
-            $("#message_area").scrollTop(1000);
+            $("#message_area").prepend("<div class='arrow_box'><span>HIT!! " + count++ + "</span></div>");
+            //$("#message_area").scrollTop(1000);
             //alert($('#message_area').scrollTop());
         }
     </script>

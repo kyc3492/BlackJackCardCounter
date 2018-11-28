@@ -15,8 +15,8 @@
 	 var count2 = 0;
 
         function ListofUsedCards() {
-            $("#counter_area").append("<div class='counter_box'><span>HIT!! " + count2++ + "</span></div>");
-            $("html").scrollTop($("html")[0].scrollHeight);
+            $("#counter_area").prepend("<div class='counter_box'><span>HIT!! " + count2++ + "</span></div>");
+            //$("html").scrollTop($("html")[0].scrollHeight);
 			
         }
 
