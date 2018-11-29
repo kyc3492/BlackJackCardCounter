@@ -14,9 +14,14 @@
     <script>
         var count = 0;
         function sendTestMessage() {
-            $("#message_area").prepend("<div class='arrow_box'><span>HIT!! " + count++ + "</span></div>");
-            //$("#message_area").scrollTop(1000);
-            //alert($('#message_area').scrollTop());
+            //최신 정보가 상단에 등장.
+            //$("#message_area").prepend("<div class='arrow_box'><span>HIT!! " + count++ + "</span></div>");
+            //최신 정보가 하단에 등장 + 자동 스크롤. 카톡처럼.
+            event.preventDefault();
+            $("#helper").append("<div class='arrow_box'><span>HIT!! " + count++ + "</span></div>");
+            //$("#helper").scrollTop($('#helper').prop('scrollHeight'));
+            $("#helper").animate({scrollTop:$('#helper').prop('scrollHeight')}, 300);
+            //alert($('#helper').scrollTop());
         }
     </script>
 </head>

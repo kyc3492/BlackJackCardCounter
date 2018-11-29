@@ -15,9 +15,14 @@
 	 var count2 = 0;
 
         function ListofUsedCards() {
-            $("#counter_area").prepend("<div class='counter_box'><span>HIT!! " + count2++ + "</span></div>");
+			//최신 정보가 상단에 등장
+            //$("#counter_area").prepend("<div class='counter_box'><span>HIT!! " + count2++ + "</span></div>");
             //$("html").scrollTop($("html")[0].scrollHeight);
-			
+			//최신 정보가 하단에 등장 + 자동 스크롤. 카톡처럼.
+            event.preventDefault();
+            $("#counter").append("<div class='counter_box'><span>HIT!! " + count2++ + "</span></div>");
+            //$("#helper").scrollTop($('#helper').prop('scrollHeight'));
+            $("#counter").animate({scrollTop:$('#counter').prop('scrollHeight')}, 300);
         }
 
 	</script>
