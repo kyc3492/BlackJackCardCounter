@@ -53,7 +53,27 @@ io.sockets.on('connection', function (socket){
         io.sockets.emit('game_start', data);
      });
 
-     socket.on('',function (){});
+     socket.on('hit',function (Hit){
+        // playercard에 한장 추가
+        playercard = playercard + [deck.shift()];
+        //playerTotal은 카드 합산 점수, pBursted는 플레이어 파산여부
+        var playerTotal = 0;
+        var pBursted = 0;
+        //playerTotal에 card값을 더하는 과정
+        for(i=0; i<playercard.length;i++){
+            playerTotal = playerTotal + playercard[i].value;
+            //21을 초과할 경우, A의 존재 여부, 없으면 burst 
+            if(playerTotal>21 && playercard.every.value == 11){
+                playerTotal = playerTotal - 10;
+            }
+            if(playerTotal>21){
+                pBursted = 1;
+                break;
+            }
+        }
+        if 
+        io.sockets.emit('hit', data)
+     });
 
      socket.on('',function (){});
 
