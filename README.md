@@ -53,3 +53,9 @@ https://chatserverinfo.herokuapp.com/
 채은 파일과 병합작업 진행
 
 DoubleD와 split 삭제 예정
+
+#2018.12.13
+
+##백엔드
+-----
+server.js hit 
