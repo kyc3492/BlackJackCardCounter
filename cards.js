@@ -1,6 +1,6 @@
-var counter = 0;
+var id = 0;
 function Card(symbol, value, count) {
-    this.count = counter++;
+    this.count = id++;
     this.symbol = symbol;
     this.value = value;
 }
