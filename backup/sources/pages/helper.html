@@ -13,12 +13,18 @@
     
     <script>
         var count = 0;
+        var msg = "<div class='bubble'><p>HIT!! " + count++ + "</p><br><p>HIY!! " + count + "</p></div>"
         function sendTestMessage() {
             //최신 정보가 상단에 등장.
             //$("#message_area").prepend("<div class='arrow_box'><span>HIT!! " + count++ + "</span></div>");
             //최신 정보가 하단에 등장 + 자동 스크롤. 카톡처럼.
             event.preventDefault();
-            $("#helper").append("<div class='arrow_box'><span>HIT!! " + count++ + "</span></div>");
+            $("#helper").append(msg);
+            console.log(msg);
+            msg = msg.replace("</div>", "");
+            console.log(msg);
+            msg = msg.concat("<br>", msg, "</div>");
+            console.log(msg);
             //$("#helper").scrollTop($('#helper').prop('scrollHeight'));
             $("#helper").animate({scrollTop:$('#helper').prop('scrollHeight')}, 300);
             //alert($('#helper').scrollTop());
@@ -26,45 +32,37 @@
     </script>
 </head>
 <style>
-    .arrow_box {
+    .bubble 
+    {
         position: relative;
-        top: 50px;
-        left: 20px;
-        background: #ffffff;
-        border: 2px solid #7a7a7a;
-        border-radius: 5px;
-        height: 100px;
         width: 200px;
-        display: table;
-        font-size: 30pt;
-        text-align: center;
+        height: auto;
+        padding: 10px;
+        background: #E0E0E0;
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+        border-radius: 15px;
+        top: 50px;
+        left: 30px;
         margin-top: 10px;
         margin-bottom: 10px;
     }
-    .arrow_box:after, .arrow_box:before {
-        right: 100%;
-        top: 50%;
-        border: solid transparent;
-        content: " ";
-        height: 0;
-        width: 0;
+
+    .bubble:after 
+    {
+        content: '';
         position: absolute;
-        pointer-events: none;
+        border-style: solid;
+        border-width: 8px 20px 8px 0;
+        border-color: transparent #E0E0E0;
+        display: block;
+        width: 0;
+        z-index: 1;
+        left: -20px;
+        top: 52px;
     }
 
-    .arrow_box:after {
-        border-color: rgba(255, 255, 255, 0);
-        border-right-color: #ffffff;
-        border-width: 10px;
-        margin-top: -30px;
-    }
-    .arrow_box:before {
-        border-color: rgba(122, 122, 122, 0);
-        border-right-color: #7a7a7a;
-        border-width: 13px;
-        margin-top: -33px;
-    }
-    .arrow_box span{
+    .bubble p{
         display: table-cell;
         vertical-align: middle;
     }
