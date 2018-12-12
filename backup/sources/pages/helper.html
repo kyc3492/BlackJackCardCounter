@@ -13,18 +13,16 @@
     
     <script>
         var count = 0;
-        var msg = "<div class='bubble'><p>HIT!! " + count++ + "</p><br><p>HIY!! " + count + "</p></div>"
+        var startTag = "<div class='bubble'>";
+        var msg = "<p>HIT!! " + count++ + "</p><br><p>HIY!! " + count + "</p>";
+        var endTag = "</div>";
         function sendTestMessage() {
             //최신 정보가 상단에 등장.
             //$("#message_area").prepend("<div class='arrow_box'><span>HIT!! " + count++ + "</span></div>");
             //최신 정보가 하단에 등장 + 자동 스크롤. 카톡처럼.
             event.preventDefault();
-            $("#helper").append(msg);
-            console.log(msg);
-            msg = msg.replace("</div>", "");
-            console.log(msg);
-            msg = msg.concat("<br>", msg, "</div>");
-            console.log(msg);
+            $("#helper").append(startTag + msg + endTag);
+            msg = msg.concat("<br>", msg);
             //$("#helper").scrollTop($('#helper').prop('scrollHeight'));
             $("#helper").animate({scrollTop:$('#helper').prop('scrollHeight')}, 300);
             //alert($('#helper').scrollTop());
