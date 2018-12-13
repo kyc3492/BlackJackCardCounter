@@ -16,7 +16,7 @@ var deck = [
     new Card('C',1),new Card('C',2),new Card('C',3),new Card('C',4),new Card('C',5),new Card('C',6),new Card('C',7),new Card('C',8),new Card('C',9),new Card('C',10),new Card('C','K'),new Card('C','Q'),new Card('C','J')
 ];
 
-function shuffle(a) {
+exports.shuffle = function(a) {
     var j, x, i;
     for (i = a.length - 1; i > 0; i--) {
         j = Math.floor(Math.random() * (i + 1));
