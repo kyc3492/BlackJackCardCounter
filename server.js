@@ -40,6 +40,9 @@ server.listen(PORT, function () {
 io.sockets.on('connection', function (socket){
      
     socket.on('game_start',function (bet){
+        //자본금에서 배팅금액 차감
+        fund = fund - bet;
+
         deck = card.shuffle(card.deck);
         //시작 카드 104장
         //cinfo = counter.remainingdecks(deck);
@@ -49,7 +52,7 @@ io.sockets.on('connection', function (socket){
         
         // 뽑은 4장을 function에 넣고 돌림
 
-        data = new fdata(bet, cinfo, playercard, dealercard);
+        data = new fdata(bet, cinfo, playercard, dealercard, fund);
         io.sockets.emit('game_start', data);
      });
 
@@ -60,21 +63,76 @@ io.sockets.on('connection', function (socket){
         var playerTotal = 0;
         var pBursted = 0;
         //playerTotal에 card값을 더하는 과정
-        for(i=0; i<playercard.length;i++){
+        for(i=0; i<playercard.length; i++){
             playerTotal = playerTotal + playercard[i].value;
-            //21을 초과할 경우, A의 존재 여부, 없으면 burst 
+            //21을 초과할 경우, A의 존재 여부, 없으면 bursted
             if(playerTotal>21 && playercard.every.value == 11){
                 playerTotal = playerTotal - 10;
             }
             if(playerTotal>21){
                 pBursted = 1;
+                //플레이어 파산하면 바로 승패로 이동
+                whoWin();
                 break;
             }
         }
-        if 
-        io.sockets.emit('hit', data)
+        
+        data = new fdata(bet, cinfo, playercard, dealercard, fund);
+        io.sockets.emit('hit', data);
      });
 
-     socket.on('',function (){});
+     socket.on('stand',function (Stand){
+        //dealerTotal은 카드 합산 점수, dBursted는 딜러 파산여부
+        var dealerTotal = 0;
+        var dBursted = 0;
+        //dealerTotal에 card값을 더하는 과정
+        for(j=0; j<dealercard.length; j++){
+            dealerTotal = dealerTotal + dealercard[j].value;
+            if(dealerTotal<17){
+                dealercard = dealercard + [deck.shift()];
+            }
+            //21을 초과할 경우, A의 존재 여부, 없으면 bursted
+            if(dealerTotal>21 && dealercard.every.value == 11){
+                dealerTotal = dealerTotal - 10;
+            }
+            if(dealerTotal>21){
+                dBursted = 1;
+                break;
+            }
+        }
+        whoWin();
+        data = new fdata(bet, cinfo, playercard, dealercard, fund);
+        io.sockets.emit('stand', data);
+     });
+
+     socket.on('whoWin',function (whoWin){
+        //플레이어 딜러 둘다 파산한 경우, 배팅을 돌려줌
+        if(pBursted == 1 && dBursted == 1){
+            fund = fund + bet;
+        }
+        //플레이어는 파산 x 딜러만 파산한 경우, 플레이어 승
+        //플레이어만 파산한 경우, bet이 사라지고 fund는 그대로니 동일
+        else if(dBursted == 1){
+            fund = fund + 2*bet;
+        }
+        //둘다 파산이 아닌 경우
+        else(){
+            //플레이어 승
+            if(playerTotal > dealerTotal){
+                fund = fund + 2*bet;
+            }
+            //무승부
+            else if(playerTotal == dealerTotal){
+                fund = fund + bet;
+            }
+            //딜러 승
+            else(){
+                fund = fund;
+            }
+        }
+
+        data = new fdata(Bet, cinfo, playercard, dealercard, fund);
+        io.sockets.emit('whoWin', data);
+     });
 
 });
