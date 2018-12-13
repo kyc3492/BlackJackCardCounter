@@ -17,15 +17,16 @@ var dealercard = []
 var playercard = []
 var cinfo = []
 
-
-function fdata(bet, cinfo, pcard, dcard, fund) {
-    this.fund = 1000;
-    this.bet = bet;
-    this.countinfo = cinfo;
-    this.playercard = pcard;
-    this.dealercard = dcard;
+var fdata = new Object();
+function fdata_initailizer() {
+    fdata.fund = 1000;
+    fdata.bet = 0;
+    fdata.countinfo = [];
+    fdata.playercard = [];
+    fdata.dealercard = [];
 };
 
+fdata_initailizer();
 
 app.get('/', function (request, response, next) {
     fs.readFile('index.html', function (error, data) {
@@ -46,7 +47,7 @@ var io = socketio.listen(server);
 io.sockets.on('connection', function (socket){
      
     socket.on('game_start',function (bet){
-        /*
+        
         //카드 리셋
         reset();
         //자본금에서 배팅금액 차감
@@ -56,17 +57,21 @@ io.sockets.on('connection', function (socket){
         //시작 카드 104장
         //cinfo = counter.remainingdecks(deck);
         
-        dealercard = [deck.shift(), deck.shift()];
-        playercard = [deck.shift(), deck.shift()];
+        //fdata.dealercard = [deck.shift(), deck.shift()];
+        //fdata.playercard = [deck.shift(), deck.shift()];
         
         // 뽑은 4장을 function에 넣고 돌림
-        */
+        
         //json화
-        fdata = JSON.stringify(fdata);
-        console.log(fund);
+
+        fdata.dealercard = [{"symbol" : "H", "value" : 5}, {"symbol" : "H", "value" : 6}];
+        fdata.playercard = [{"symbol" : "H", "value" : 5}, {"symbol" : "H", "value" : 6}];
+        //fdata = JSON.stringify(fdata);
+        //console.log(fund);
 
         //data = data(bet, cinfo, playercard, dealercard, fund);
         io.sockets.emit('game_start', fdata);
+        console.log(fdata);
      });
 
      socket.on('hit',function (Hit){

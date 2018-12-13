@@ -60,8 +60,8 @@ var io = socketio.listen(server);
 io.sockets.on('connection', function (socket) {
 
     socket.on('game_start',function (data){
-        blackjack = JSON.stringify(deck[1]);
-        console.log(blackjack);
+        blackjack = JSON.stringify(deck[data]);
+        console.log(data, blackjack);
         io.sockets.emit('game_start',blackjack);
     });
 
