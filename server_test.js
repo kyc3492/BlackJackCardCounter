@@ -46,7 +46,7 @@ var io = socketio.listen(server);
 io.sockets.on('connection', function (socket){
      
     socket.on('game_start',function (bet){
-
+        /*
         //카드 리셋
         reset();
         //자본금에서 배팅금액 차감
@@ -60,7 +60,7 @@ io.sockets.on('connection', function (socket){
         playercard = [deck.shift(), deck.shift()];
         
         // 뽑은 4장을 function에 넣고 돌림
-
+        */
         //json화
         fdata = JSON.stringify(fdata);
         console.log(fund);

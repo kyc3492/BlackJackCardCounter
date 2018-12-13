@@ -8,6 +8,10 @@
 
 	<script>
 	//버튼 통신 동작, 로컬로 html만 구동시키는거는 아마 문제가 생길 것.
+
+	var playercard;
+	var dealercard;
+
 	var socket = io.connect();
 	$('#bet_button').click(function(){
 		var your_bet = parseInt(document.getElementById("your_bet").value);
@@ -21,7 +25,11 @@
 		console.log(data);
 
 		$.getJSON('/data', function(data){
-			//카드 공개.
+			playercard = data.pcard;
+			dealercard = data.dcard;
+			
+			open_cards();
+
 			isOpened = true;
 			//카드 공개 끝
 		});
@@ -64,11 +72,27 @@
 	}
 
 	var i=2;
-	function hit(src){
-		
+	function hit(src){		
 		$('.player').append('<img src = "' + src + '" / style = "width: 90; height: 113px; margin-left: 5px">');
 	}
+
+	//카드 공개 알고리즘
+
+	function open_cards() {
+		var Pcardname;
+		var Dcardname;
+
+		playercard.forEach(i => {
+			Pcardname[i] = playercard[i].symbol.toLowerCase() + playercard[i].value;
+			$('.player').append('<img src = "' + P[i] + '.jpg" / style = "width: 90; height: 113px; margin-left: 5px">')
+		});
+		dealercard.forEach(i =>{
+			Dcardname[i] = dealercard[i].symbol.toLowerCase() + dealercard[i].value;
+			$('.dealer').append('<img src = "' + Dcardname[i] + '.jpg" / style = "width: 90; height: 113px; margin-left: 5px">')
+		});
+	}
 	</script>
+
 	<title>Game.html</title>
 	
 	<!--게임 버튼, 베팅금 조절 버튼 스타일-->
