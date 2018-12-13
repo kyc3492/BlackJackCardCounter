@@ -115,25 +115,29 @@ io.sockets.on('connection', function (socket){
 
      socket.on('stand',function (Stand){
         //dealerTotal에 card값을 더하는 과정
-        for(j=0; j<fdata.dealercard.length; j++){
-            dealerTotal = dealerTotal + fdata.dealercard[j].value;
-            if(dealerTotal<17){
-                fdata.dealercard = fdata.dealercard + [deck.shift()];
-            }
-            //21을 초과할 경우, A의 존재 여부, 없으면 bursted
-            if(dealerTotal>21 && fdata.dealercard.every.value == 11){
-                dealerTotal = dealerTotal - 10;
-            }
-            if(dealerTotal>21){
-                dBursted = 1;
-                break;
-            }
+
+        while(dealerTotal < 17){
+            strDealercard = JSON.stringify(fdata.dealercard);
+            strDealercard = strDealercard.replace("]", "");
+            strDealercard = strDealercard + "," + JSON.stringify(deck.shift()) + "]";
+            fdata.dealercard = JSON.parse(strDealercard)
+
+            additional_calculaterD();
         }
 
-        pBursted = 1;
+        console.log(fdata.dealercard);
+
+        if(dealerTotal>21){
+            dBursted = 1;
+            whoWin();
+            return;
+        }
+
+        dBursted = 0;
+        pBursted = 0;
         whoWin();
         //data = new fdata(bet, cinfo, playercard, dealercard, fund);
-        io.sockets.emit('stand', data);
+        io.sockets.emit('stand', fdata);
      });
 
      function whoWin(){
@@ -216,21 +220,35 @@ io.sockets.on('connection', function (socket){
         } else {
             playerTotal = playerTotal + fdata.playercard[i].value;
         }
+
+        if(playerTotal > 21){
+            for(var i = 0; i < playercard.length; i++){
+                if(playercard[i].value == 11){
+                    playerTotal - 10;
+                }
+            }
+        }
         console.log("playerTotal: " + playerTotal);
     }
 
     function additional_calculaterD(){
         var i = fdata.dealercard.length - 1;
 
-        for(i=0; i<fdata.dealercard.length; i++){
-            if(fdata.dealercard[i].value == 11 && dealerTotal + fdata.dealercard[i].value> 21){
-                dealerTotal = dealerTotal + 1;
-            } else if (fdata.dealercard[i].value == 'K' || fdata.dealercard[i].value == 'Q' || fdata.dealercard[i].value == 'J'){
-                dealerTotal = dealerTotal + 10;
-            } else {
-                dealerTotal = dealerTotal + fdata.dealercard[i].value;
+        if(fdata.dealercard[i].value == 11 && dealerTotal + fdata.dealercard[i].value> 21){
+            dealerTotal = dealerTotal + 1;
+        } else if (fdata.dealercard[i].value == 'K' || fdata.dealercard[i].value == 'Q' || fdata.dealercard[i].value == 'J'){
+            dealerTotal = dealerTotal + 10;
+        } else {
+            dealerTotal = dealerTotal + fdata.dealercard[i].value;
+        }
+        console.log("dealerTotal: " + dealerTotal + "//" + fdata.dealercard.length);
+
+        if(dealerTotal > 21){
+            for(var i = 0; i < dealercard.length; i++){
+                if(dealercard[i].value == 11){
+                    dealerTotal - 10;
+                }
             }
-            console.log("dealerTotal: " + dealerTotal);
         }
     }
 });

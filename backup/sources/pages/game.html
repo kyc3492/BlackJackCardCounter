@@ -59,10 +59,34 @@
 		});
 
 		//스탠드버튼 전송 함수
-		$('Stand_button').click(function(){
+		$('#Stand_button').click(function(){
 			if(isOpened == true){
 				socket.emit('stand');
 				console.log("EMIT STAND");
+
+				$.getJSON('/fdata', function(data){
+					playercard = data.playercard;
+					dealercard = data.dealercard;
+
+					console.log(dealercard.length);
+
+					//방금 받은 카드를 오픈
+					dealercard.forEach(card => {
+						if (card.value == 11){
+							card.value = 1;
+						}
+					});
+					var Dcardname = dealercard[1].symbol.toLowerCase() + dealercard[1].value;
+					$('.dealer').append('<img src = "sources/images/cards/' + Dcardname + '.jpg" / style = "width: 90; height: 113px; margin-left: 5px">');
+					$('#card_back').remove();
+					
+					if(playercard.length > 2){
+						for(var i = 2; i < playercard.length; i++){
+							var Dcardname = dealercard[i].symbol.toLowerCase() + dealercard[i].value;
+							$('.dealer').append('<img src = "sources/images/cards/' + Dcardname + '.jpg" / style = "width: 90; height: 113px; margin-left: 5px">');					
+						}
+					}
+				});
 			}
 		});
 
@@ -112,7 +136,7 @@
 		}
 		Dcardname = dealercard[0].symbol.toLowerCase() + dealercard[0].value;
 		$('.dealer').append('<img src = "sources/images/cards/' + Dcardname + '.jpg" / style = "width: 90; height: 113px; margin-left: 5px">');
-		$('.dealer').append('<img src="sources/images/cards/back.jpg" / style = "width: 90; height: 113px; margin-left: 5px">');
+		$('.dealer').append('<img id="card_back" src="sources/images/cards/back.jpg" / style = "width: 90; height: 113px; margin-left: 5px">');
 	}
 	</script>
 
