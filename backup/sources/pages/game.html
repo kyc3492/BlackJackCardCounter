@@ -17,7 +17,7 @@
 		var your_bet = parseInt(document.getElementById("your_bet").value);
 		socket.emit('game_start', your_bet);
 		console.log(your_bet + " SEND!");
-		console.log(fdata);
+		//console.log(fdata);
 	});
 
 	$(document).ready(function(){
@@ -25,8 +25,10 @@
 		var isOpened = false;
 
 		$.getJSON('/fdata', function(data){
-			playercard = data.pcard;
-			dealercard = data.dcard;
+			console.log(data);
+
+			playercard = data.playercard;
+			dealercard = data.dealercard;
 			
 			open_cards();
 			console.log(playercard, dealercard);
@@ -82,14 +84,21 @@
 		var Pcardname;
 		var Dcardname;
 
-		playercard.forEach(i => {
-			Pcardname[i] = playercard[i].symbol.toLowerCase() + playercard[i].value;
-			$('.player').append('<img src = "' + P[i] + '.jpg" / style = "width: 90; height: 113px; margin-left: 5px">')
+		playercard.forEach(card => {
+			console.log(card);
+			if (card.value == 11){
+				card.value = 1;
+			}
+			Pcardname = card.symbol.toLowerCase() + card.value;
+			$('.player').append('<img src = "sources/images/cards/' + Pcardname + '.jpg" / style = "width: 90; height: 113px; margin-left: 5px">')
 		});
-		dealercard.forEach(i =>{
-			Dcardname[i] = dealercard[i].symbol.toLowerCase() + dealercard[i].value;
-			$('.dealer').append('<img src = "' + Dcardname[i] + '.jpg" / style = "width: 90; height: 113px; margin-left: 5px">')
-		});
+		
+		if (dealercard[0].value == 11){
+			dealercard[0].value = 1;
+		}
+		Dcardname = dealercard[0].symbol.toLowerCase() + dealercard[0].value;
+		$('.dealer').append('<img src = "sources/images/cards/' + Dcardname + '.jpg" / style = "width: 90; height: 113px; margin-left: 5px">');
+		$('.dealer').append('<img src="sources/images/cards/back.jpg" / style = "width: 90; height: 113px; margin-left: 5px">');
 	}
 	</script>
 
@@ -163,9 +172,8 @@
     <p style="color: #f6c6c6; font-size: 16px; margin-top: 25px">Dealer</p>
 			
 	<!--딜러 카드 이미지-->
-		<div class="dealer"><img src="sources/images/cards/back.jpg" style="width: 90px; height: 113px"></div>
-		<div class="player"><img src="sources/images/cards/back.jpg" style="width: 90px; height: 113px"></div>
-			
+		<div class="dealer"></div>
+		<div class="player"></div>
 	<!--현재 카드 숫자 합을 표시해줄 텍스트 부분-->
 	<div>
 		<p style="color: #f6c6c6; font-size: 16px; margin-top: 10px" id="sum">Sum</p>
