@@ -58,4 +58,5 @@ DoubleD와 split 삭제 예정
 
 ##백엔드
 -----
-server.js hit 
+server.js
+hit, stand, whoWin
