@@ -40,6 +40,8 @@ server.listen(PORT, function () {
 io.sockets.on('connection', function (socket){
      
     socket.on('game_start',function (bet){
+        //카드 리셋
+        reset();
         //자본금에서 배팅금액 차감
         fund = fund - bet;
 
@@ -131,8 +133,16 @@ io.sockets.on('connection', function (socket){
             }
         }
 
-        data = new fdata(Bet, cinfo, playercard, dealercard, fund);
+        data = new fdata(bet, cinfo, playercard, dealercard, fund);
         io.sockets.emit('whoWin', data);
+     });
+
+     socket.on('reset',function(reset){
+        playercard = []
+        dealercard = []
+
+        data = new fdata(bet, cinfo, playercard, dealercard, fund);
+        io.sockets.emit('reset');
      });
 
 });
