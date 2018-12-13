@@ -63,12 +63,7 @@ io.sockets.on('connection', function (socket){
         
         // 뽑은 4장을 function에 넣고 돌림
         
-        //json화
-
-        //fdata.dealercard = [{"symbol" : "H", "value" : 5}, {"symbol" : "H", "value" : 6}];
-        //fdata.playercard = [{"symbol" : "H", "value" : 5}, {"symbol" : "H", "value" : 6}];
-        //fdata = JSON.stringify(fdata);
-        //console.log(fund);
+        
 
         //data = data(bet, cinfo, playercard, dealercard, fund);
         io.sockets.emit('game_start', fdata);

@@ -89,9 +89,16 @@ io.sockets.on('connection', function (socket){
      });
 
      socket.on('hit',function (Hit){
-        // playercard에 한장 추가
-        fdata.playercard = fdata.playercard + [deck.shift()];
+        // playercard에 한장 추가과정 [연철]
+        strPlayercard = JSON.stringify(fdata.playercard);
+        strPlayercard = strPlayercard.replace("]", "");
+        strPlayercard = strPlayercard + "," + JSON.stringify(deck.shift()) + "]";
+        //fdata.playercard = fdata.playercard + [deck.shift()];
+        fdata.playercard = JSON.parse(strPlayercard);
         //playerTotal에 card값을 더하는 과정
+        console.log(strPlayercard);
+        //굳이 로그 띄워보는 코드임 지워도 됨 [연철]
+
         for(i=0; i<fdata.playercard.length; i++){
             playerTotal = playerTotal + fdata.playercard[i].value;
             //21을 초과할 경우, A의 존재 여부, 없으면 bursted
@@ -104,10 +111,11 @@ io.sockets.on('connection', function (socket){
                 whoWin();
                 break;
             }
+            console.log(playerTotal);
         }
         
         //data = new fdata(bet, cinfo, playercard, dealercard, fund);
-        io.sockets.emit('hit', data);
+        io.sockets.emit('hit', fdata);
      });
 
      socket.on('stand',function (Stand){
