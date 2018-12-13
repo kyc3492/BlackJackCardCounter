@@ -18,6 +18,7 @@
 	$(document).ready(function(){
 		//data가 왔다.
 		var isOpened = false;
+		console.log(data);
 
 		$.getJSON('/data', function(data){
 			//카드 공개.
@@ -41,7 +42,7 @@
 			}
 		});
 
-		
+
 	});
 
 	//베팅금 조절 버튼 동작
@@ -146,7 +147,7 @@
 		<p style="color: #f6c6c6; font-size: 16px; margin-top: 10px" id="sum">Sum</p>
 			
 	<!--게임 버튼-->
-		<input type="button" id="Hit_button" class="game_button" value="Hit" onclick="hit('sources/images/cards/c9.jpg')>
+		<input type="button" id="Hit_button" class="game_button" value="Hit" onclick="hit('sources/images/cards/c9.jpg')">
 		<input type="button" id="Stand_button" class="game_button" value="Stand">
 	</div>
 	
