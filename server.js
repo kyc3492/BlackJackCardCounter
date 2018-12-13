@@ -77,6 +77,7 @@ io.sockets.on('connection', function (socket){
         fdata.dealercard = [deck.shift(), deck.shift()];
         fdata.playercard = [deck.shift(), deck.shift()];
         
+        calculater();
         // 뽑은 4장을 function에 넣고 돌림
 
         //json화
@@ -99,19 +100,13 @@ io.sockets.on('connection', function (socket){
         console.log(strPlayercard);
         //굳이 로그 띄워보는 코드임 지워도 됨 [연철]
 
-        for(i=0; i<fdata.playercard.length; i++){
-            playerTotal = playerTotal + fdata.playercard[i].value;
-            //21을 초과할 경우, A의 존재 여부, 없으면 bursted
-            if(playerTotal>21 && fdata.playercard.every.value == 11){
-                playerTotal = playerTotal - 10;
-            }
-            if(playerTotal>21){
-                pBursted = 1;
-                //플레이어 파산하면 바로 승패로 이동
-                whoWin();
-                break;
-            }
-            console.log(playerTotal);
+        additional_calculaterP();
+
+        if(playerTotal>21){
+            pBursted = 1;
+            //플레이어 파산하면 바로 승패로 이동
+            whoWin();
+            return;
         }
         
         //data = new fdata(bet, cinfo, playercard, dealercard, fund);
@@ -177,4 +172,56 @@ io.sockets.on('connection', function (socket){
       //  io.sockets.emit('reset');
      };
 
+    //총합 계산기
+    function calculater(){
+        for(i=0; i<fdata.playercard.length; i++){
+            if(fdata.playercard[i].value == 11 && playerTotal > 21){
+                playerTotal = playerTotal + 1;
+            } else if (fdata.playercard[i].value == 'K' || fdata.playercard[i].value == 'Q' || fdata.playercard[i].value == 'J'){
+                playerTotal = playerTotal + 10;
+            } else {
+                playerTotal = playerTotal + fdata.playercard[i].value;
+            }
+            console.log("playerTotal: " + playerTotal);
+        }
+
+        for(i=0; i<fdata.dealercard.length; i++){
+            if(fdata.dealercard[i].value == 11 && fdata.dealerTotal > 21){
+                dealerTotal = dealerTotal + 1;
+            } else if (fdata.dealercard[i].value == 'K' || fdata.dealercard[i].value == 'Q' || fdata.dealercard[i].value == 'J'){
+                dealerTotal = dealerTotal + 10;
+            } else {
+                dealerTotal = dealerTotal + fdata.dealercard[i].value;
+            }
+            console.log("dealerTotal: " + dealerTotal);
+        }
+    }
+
+    function additional_calculaterP(){
+        var i = fdata.playercard.length - 1;
+
+        if(fdata.playercard[i].value == 11 && playerTotal > 21){
+            playerTotal = playerTotal + 1;
+        } else if (fdata.playercard[i].value == 'K' || fdata.playercard[i].value == 'Q' || fdata.playercard[i].value == 'J'){
+            playerTotal = playerTotal + 10;
+        } else {
+            playerTotal = playerTotal + fdata.playercard[i].value;
+        }
+        console.log("playerTotal: " + playerTotal);
+    }
+
+    function additional_calculaterD(){
+        var i = fdata.dealercard.length - 1;
+
+        for(i=0; i<fdata.dealercard.length; i++){
+            if(fdata.dealercard[i].value == 11 && fdata.dealerTotal > 21){
+                dealerTotal = dealerTotal + 1;
+            } else if (fdata.dealercard[i].value == 'K' || fdata.dealercard[i].value == 'Q' || fdata.dealercard[i].value == 'J'){
+                dealerTotal = dealerTotal + 10;
+            } else {
+                dealerTotal = dealerTotal + fdata.dealercard[i].value;
+            }
+            console.log("dealerTotal: " + dealerTotal);
+        }
+    }
 });
