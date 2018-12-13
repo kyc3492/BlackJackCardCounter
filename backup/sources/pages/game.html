@@ -39,6 +39,7 @@
 				//카드 공개 끝
 
 				previous_fund = data.fund;
+				$('#available_funds').text(data.fund);
 			});
 		});
 		//data가 왔다.
@@ -88,7 +89,7 @@
 					$('#card_back').remove();
 					
 					if(playercard.length > 2){
-						for(var i = 2; i < playercard.length; i++){
+						for(var i = 2; i < dealercard.length; i++){
 							var Dcardname = dealercard[i].symbol.toLowerCase() + dealercard[i].value;
 							$('.dealer').append('<img class = "card" / src = "sources/images/cards/' + Dcardname + '.jpg" / style = "width: 90; height: 113px; margin-left: 5px">');					
 						}
@@ -130,7 +131,7 @@
 		var your_bet = parseInt(document.getElementById("your_bet").value);
 		//var available_funds = parseInt(document.getElementById("available_funds").innerHTML) - your_bet;
 		//document.getElementById("available_funds").innerHTML = available_funds;
-		alert("당신이 베팅한 금액은 $" + your_bet + " 이고, 남은 자금은 $" + available_funds + " 입니다.");
+		alert("당신이 베팅한 금액은 $" + your_bet + " 이고, 남는 자금은 $" + available_funds + " 입니다.");
 	}
 
 	var i=2;
