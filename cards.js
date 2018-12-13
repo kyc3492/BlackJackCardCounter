@@ -16,13 +16,34 @@ var deck = [
     new Card('C',11),new Card('C',2),new Card('C',3),new Card('C',4),new Card('C',5),new Card('C',6),new Card('C',7),new Card('C',8),new Card('C',9),new Card('C',10),new Card('C','K'),new Card('C','Q'),new Card('C','J')
 ];
 
-exports.shuffle = function(a) {
+
+    exports.shuffle = function() {
     var j, x, i;
-    for (i = a.length - 1; i > 0; i--) {
+    for (i = deck.length; i > 0; i--) {
         j = Math.floor(Math.random() * (i + 1));
-        x = a[i];
-        a[i] = a[j];
-        a[j] = x;
+        x = deck[i];
+        deck[i] = deck[j];
+        deck[j] = x;
     }
-    return a;
+    return deck;
 }
+
+/*
+
+    exports.shuffle = function(array){
+        let counter = 104;
+
+        while(counter>0){
+            let index = Math.floor(Math.random()*counter);
+
+            counter--;
+
+            let temp = array[counter];
+            array[counter] = array[index];
+            array[index] = temp;
+        }
+
+        return array;
+    }
+
+*/
