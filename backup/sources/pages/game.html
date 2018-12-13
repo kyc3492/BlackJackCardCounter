@@ -5,10 +5,46 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-	
-	<!--베팅금 조절 버튼 동작-->
+
 	<script>
-	
+	//버튼 통신 동작, 로컬로 html만 구동시키는거는 아마 문제가 생길 것.
+	var socket = io.connect();
+	$('#bet_button').click(function(){
+		var your_bet = parseInt(document.getElementById("your_bet").value);
+		socket.emit('game_start', your_bet);
+		console.log(your_bet + " SEND!");
+	});
+
+	$(document).ready(function(){
+		//data가 왔다.
+		var isOpened = false;
+
+		$.getJSON('/data', function(data){
+			//카드 공개.
+			isOpened = true;
+			//카드 공개 끝
+		});
+		
+		//히트버튼 전송 함수
+		$('#Hit_button').click(function(){
+			if(isOpened == true){
+				socket.emit('hit');
+				console.log("EMIT HIT");
+			}
+		});
+
+		//스탠드버튼 전송 함수
+		$('Stand_button').click(function(){
+			if(isOpened == true){
+				socket.emit('stand');
+				console.log("EMIT STAND");
+			}
+		});
+
+		
+	});
+
+	//베팅금 조절 버튼 동작
 	
 	function bet_plus(num) {
 		var new_bet = parseInt(document.getElementById("your_bet").value) + parseInt(num);
@@ -25,12 +61,12 @@
 		document.getElementById("available_funds").innerHTML = available_funds;
 		alert("당신이 베팅한 금액은 $" + your_bet + " 이고, 남은 자금은 $" + available_funds + " 입니다.");
 	}
+
 	var i=2;
 	function hit(src){
 		
 		$('.player').append('<img src = "' + src + '" / style = "width: 90; height: 113px; margin-left: 5px">');
 	}
-	
 	</script>
 	<title>Game.html</title>
 	
@@ -110,8 +146,8 @@
 		<p style="color: #f6c6c6; font-size: 16px; margin-top: 10px" id="sum">Sum</p>
 			
 	<!--게임 버튼-->
-		<input type="button" class="game_button" value="Hit" onclick="hit('sources/images/cards/c9.jpg')">
-		<input type="button" class="game_button" value="Stand">
+		<input type="button" id="Hit_button" class="game_button" value="Hit" onclick="hit('sources/images/cards/c9.jpg')>
+		<input type="button" id="Stand_button" class="game_button" value="Stand">
 	</div>
 	
 	<!--베팅금 조절 부분-->
@@ -124,7 +160,8 @@
 		
 	<div style="float: right; height: 100px; width: 33%; padding-top: 20px">
 		<p style="color: white; font-size: 16px; margin: auto; width: 100px">Your Bet</p>
-		<input type="text" id="your_bet" style="width: 100px; height: 30px; margin-top: 5px">
+		<input type="text" id="your_bet" style="width: 100px; height: 30px; margin-top: 5px" value="100">
+		<!--기본설정 배팅금액: 100-->
 	</div>
 		
 	<div style="float: right; height: 100px; width: 33%; padding-top: 5px; padding-left: 14px; padding-right: 14px">
@@ -136,6 +173,7 @@
 	
 	<div>
 		<img src="sources/images/button.png" id="bet_button" style="width: 80px; height: 30px" onclick="bet()">
+
 	</div>
 	
 	<!--현재 남아있는 자금 표시해주는 부분-->

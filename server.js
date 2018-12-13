@@ -2,15 +2,15 @@ var socketio = require('socket.io');
 var express = require('express');
 var http = require('http');
 var fs = require('fs');
-var counter = require('counter.js')
+var ejs = require('ejs');
+//var counter = require('counter.js')
 
-var card = require('cards.js');
+var card = require('./cards.js');
 
 var app = express();
 var server = http.createServer(app);
 
-app.use('/js',express.static(__dirname + "/js"));
-app.use('/css',express.static(__dirname + "/css"));
+app.use(express.static("backup"));
 
 var deck = []
 var dealercard = []
@@ -29,14 +29,16 @@ function fdata(bet, cinfo, pcard, dcard, fund) {
 
 app.get('/', function (request, response, next) {
     fs.readFile('index.html', function (error, data) {
+        //실제론 게임이 진행되는 곳은 game.html이지만 같은 하나의 페이지에서 진행되므로 일단 놔둬보겠음.
         response.send(data.toString());
     });
 });
 
-server.listen(PORT, function () {
+server.listen(52273, function () {
     console.log('blackjack server running');
 });
 
+var io = socketio.listen(server);
 io.sockets.on('connection', function (socket){
      
     socket.on('game_start',function (bet){
@@ -116,7 +118,7 @@ io.sockets.on('connection', function (socket){
             fund = fund + 2*bet;
         }
         //둘다 파산이 아닌 경우
-        else(){
+        else{
             //플레이어 승
             if(playerTotal > dealerTotal){
                 fund = fund + 2*bet;
@@ -126,7 +128,7 @@ io.sockets.on('connection', function (socket){
                 fund = fund + bet;
             }
             //딜러 승
-            else(){
+            else{
                 fund = fund;
             }
         }

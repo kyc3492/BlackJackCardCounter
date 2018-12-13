@@ -7,8 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
+            console.log("index.html");
             $("#game").load("sources/pages/game.html");
             $("#helper").load("sources/pages/helper.html");
             $("#counter").load("sources/pages/counter.html");
