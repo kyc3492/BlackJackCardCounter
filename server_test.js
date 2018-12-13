@@ -51,21 +51,22 @@ io.sockets.on('connection', function (socket){
         //카드 리셋
         reset();
         //자본금에서 배팅금액 차감
+        fdata.bet = bet;
         fdata.fund = fdata.fund - fdata.bet;
 
         deck = card.shuffle(card.deck);
         //시작 카드 104장
-        //cinfo = counter.remainingdecks(deck);
+        //fdata.cinfo = counter.remainingdecks(deck);
         
-        //fdata.dealercard = [deck.shift(), deck.shift()];
-        //fdata.playercard = [deck.shift(), deck.shift()];
+        fdata.dealercard = [deck.shift(), deck.shift()];
+        fdata.playercard = [deck.shift(), deck.shift()];
         
         // 뽑은 4장을 function에 넣고 돌림
         
         //json화
 
-        fdata.dealercard = [{"symbol" : "H", "value" : 5}, {"symbol" : "H", "value" : 6}];
-        fdata.playercard = [{"symbol" : "H", "value" : 5}, {"symbol" : "H", "value" : 6}];
+        //fdata.dealercard = [{"symbol" : "H", "value" : 5}, {"symbol" : "H", "value" : 6}];
+        //fdata.playercard = [{"symbol" : "H", "value" : 5}, {"symbol" : "H", "value" : 6}];
         //fdata = JSON.stringify(fdata);
         //console.log(fund);
 
