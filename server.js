@@ -42,10 +42,11 @@ var io = socketio.listen(server);
 io.sockets.on('connection', function (socket){
      
     socket.on('game_start',function (bet){
+
         //카드 리셋
         reset();
         //자본금에서 배팅금액 차감
-        fund = fund - bet;
+        fdata.fund = fdata.fund - fdata.bet;
 
         deck = card.shuffle(card.deck);
         //시작 카드 104장
@@ -56,8 +57,8 @@ io.sockets.on('connection', function (socket){
         
         // 뽑은 4장을 function에 넣고 돌림
 
-        data = new fdata(bet, cinfo, playercard, dealercard, fund);
-        io.sockets.emit('game_start', data);
+        //data = data(bet, cinfo, playercard, dealercard, fund);
+        io.sockets.emit('game_start', fdata);
      });
 
      socket.on('hit',function (Hit){
@@ -139,12 +140,12 @@ io.sockets.on('connection', function (socket){
         io.sockets.emit('whoWin', data);
      });
 
-     socket.on('reset',function(reset){
+     function reset(){
         playercard = []
         dealercard = []
 
-        data = new fdata(bet, cinfo, playercard, dealercard, fund);
-        io.sockets.emit('reset');
-     });
+    //    data = new fdata(bet, cinfo, playercard, dealercard, fund);
+      //  io.sockets.emit('reset');
+     };
 
 });
