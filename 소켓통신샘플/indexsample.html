@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    
+
+    <script>
+        var socket = io.connect();   
+        socket.on('game_start', function(data){
+            var output = '';
+            output += '<h1>' + data.toString();
+            output += '</h1>';
+            $(output).prependTo('#content');
+        });
+
+        
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#b1').click(function(){
+                var x = 1
+                socket.emit('game_start', x)
+            })
+
+            $.getJSON('/blackjack', function (data) {
+                var output = '';
+                output += '<h1>' + data;
+                output += '</h1>';
+                $(output).prependTo('#content'); 
+            });
+
+
+
+        });    
+    </script>
+
+</head>
+<body>
+    <h1> hello </h1>
+    <ul id = "content">
+    
+    </ul>
+    <button id = "b1">Button</button>
+
+</body>
+</html>
