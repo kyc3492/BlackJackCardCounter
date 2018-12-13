@@ -16,8 +16,25 @@ var deck = []
 var dealercard = []
 var playercard = []
 var cinfo = []
+//플레이어, 딜러의 카드값과 파산여부
+var playerTotal = 0;
+var pBursted = 0;
+var dealerTotal = 0;
+var dBursted = 0;
 
 
+var fdata = new Object();
+function fdata_initializer(){
+    fdata.fund = 1000;
+    fdata.bet = 0;
+    fdata.countinfo = [];
+    fdata.playercard = [];
+    fdata.dealercard = [];
+}
+
+fdata_initializer();
+
+/*
 function fdata(bet, cinfo, pcard, dcard, fund) {
     this.fund = 1000;
     this.bet = bet;
@@ -25,7 +42,7 @@ function fdata(bet, cinfo, pcard, dcard, fund) {
     this.playercard = pcard;
     this.dealercard = dcard;
 };
-
+*/
 
 app.get('/', function (request, response, next) {
     fs.readFile('index.html', function (error, data) {
@@ -50,31 +67,30 @@ io.sockets.on('connection', function (socket){
         //카드 리셋
         reset();
         //자본금에서 배팅금액 차감
+        fdata.bet = bet;
         fdata.fund = fdata.fund - fdata.bet;
 
         deck = card.shuffle(card.deck);
         //시작 카드 104장
         //cinfo = counter.remainingdecks(deck);
         
-        dealercard = [deck.shift(), deck.shift()];
-        playercard = [deck.shift(), deck.shift()];
+        fdata.dealercard = [deck.shift(), deck.shift()];
+        fdata.playercard = [deck.shift(), deck.shift()];
         
         // 뽑은 4장을 function에 넣고 돌림
 
         //json화
-        fdata = JSON.stringify(fdata);
-        console.log(fund);
+       //fdata = JSON.stringify(fdata);
+        
 
         //data = data(bet, cinfo, playercard, dealercard, fund);
         io.sockets.emit('game_start', fdata);
+        console.log(fdata);
      });
 
      socket.on('hit',function (Hit){
         // playercard에 한장 추가
         playercard = playercard + [deck.shift()];
-        //playerTotal은 카드 합산 점수, pBursted는 플레이어 파산여부
-        var playerTotal = 0;
-        var pBursted = 0;
         //playerTotal에 card값을 더하는 과정
         for(i=0; i<playercard.length; i++){
             playerTotal = playerTotal + playercard[i].value;
@@ -84,6 +100,7 @@ io.sockets.on('connection', function (socket){
             }
             if(playerTotal>21){
                 pBursted = 1;
+
                 //플레이어 파산하면 바로 승패로 이동
                 whoWin();
                 break;
@@ -95,9 +112,6 @@ io.sockets.on('connection', function (socket){
      });
 
      socket.on('stand',function (Stand){
-        //dealerTotal은 카드 합산 점수, dBursted는 딜러 파산여부
-        var dealerTotal = 0;
-        var dBursted = 0;
         //dealerTotal에 card값을 더하는 과정
         for(j=0; j<dealercard.length; j++){
             dealerTotal = dealerTotal + dealercard[j].value;
@@ -151,7 +165,10 @@ io.sockets.on('connection', function (socket){
      function reset(){
         playercard = []
         dealercard = []
-
+        playerTotal = 0;
+        pBursted = 0;
+        dealerTotal = 0;
+        dBursted = 0;
     //    data = new fdata(bet, cinfo, playercard, dealercard, fund);
       //  io.sockets.emit('reset');
      };
