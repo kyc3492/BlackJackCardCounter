@@ -129,6 +129,8 @@ io.sockets.on('connection', function (socket){
                 break;
             }
         }
+
+        pBursted = 1;
         whoWin();
         //data = new fdata(bet, cinfo, playercard, dealercard, fund);
         io.sockets.emit('stand', data);
@@ -136,29 +138,36 @@ io.sockets.on('connection', function (socket){
 
      function whoWin(){
         //플레이어 파산한 경우, 무조건 패
+        console.log("whoWin In");
         if(pBursted == 1){
             fdata.fund = fdata.fund ;
+            console.log("DWin");
         }
         //플레이어는 파산 x 딜러만 파산한 경우, 플레이어 승
         //플레이어만 파산한 경우, bet이 사라지고 fund는 그대로니 동일
         else if(dBursted == 1){
             fdata.fund = fdata.fund + 2*fdata.bet;
+            console.log("Pwin");
         }
         //둘다 파산이 아닌 경우
         else{
             //플레이어 승
             if(playerTotal > dealerTotal){
                 fdata.fund = fdata.fund + 2*fdata.bet;
+                console.log("PWin");
             }
             //무승부
             else if(playerTotal == dealerTotal){
                 fdata.fund = fdata.fund + fdata.bet;
+                console.log("Draw");
             }
             //딜러 승
             else{
                 fdata.fund = fdata.fund;
+                console.log("DWin");
             }
         }
+        console.log(fdata.fund);
      };
 
      function reset(){
@@ -186,7 +195,7 @@ io.sockets.on('connection', function (socket){
         }
 
         for(i=0; i<fdata.dealercard.length; i++){
-            if(fdata.dealercard[i].value == 11 && fdata.dealerTotal > 21){
+            if(fdata.dealercard[i].value == 11 && dealerTotal > 21){
                 dealerTotal = dealerTotal + 1;
             } else if (fdata.dealercard[i].value == 'K' || fdata.dealercard[i].value == 'Q' || fdata.dealercard[i].value == 'J'){
                 dealerTotal = dealerTotal + 10;
@@ -200,7 +209,7 @@ io.sockets.on('connection', function (socket){
     function additional_calculaterP(){
         var i = fdata.playercard.length - 1;
 
-        if(fdata.playercard[i].value == 11 && playerTotal > 21){
+        if(fdata.playercard[i].value == 11 && playerTotal + fdata.playercard[i].value > 21){
             playerTotal = playerTotal + 1;
         } else if (fdata.playercard[i].value == 'K' || fdata.playercard[i].value == 'Q' || fdata.playercard[i].value == 'J'){
             playerTotal = playerTotal + 10;
@@ -214,7 +223,7 @@ io.sockets.on('connection', function (socket){
         var i = fdata.dealercard.length - 1;
 
         for(i=0; i<fdata.dealercard.length; i++){
-            if(fdata.dealercard[i].value == 11 && fdata.dealerTotal > 21){
+            if(fdata.dealercard[i].value == 11 && dealerTotal + fdata.dealercard[i].value> 21){
                 dealerTotal = dealerTotal + 1;
             } else if (fdata.dealercard[i].value == 'K' || fdata.dealercard[i].value == 'Q' || fdata.dealercard[i].value == 'J'){
                 dealerTotal = dealerTotal + 10;
