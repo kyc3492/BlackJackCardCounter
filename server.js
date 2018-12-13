@@ -172,6 +172,7 @@ io.sockets.on('connection', function (socket){
             }
         }
         console.log(fdata.fund);
+        io.sockets.emit('game_over', fdata);
      };
 
      function reset(){
