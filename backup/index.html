@@ -3,93 +3,59 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            console.log("index.html");
-            $("#game").load("sources/pages/game.html");
-            $("#helper").load("sources/pages/helper.html");
-            $("#counter").load("sources/pages/counter.html");
-        });
-    </script>
+    <title>Login</title>
+	<script>
+	</script>
+	<style>
+	
+	button{
+	
+  background:#3a536c;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:60px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#3a536c;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #3a536c;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
 
-    <style>
-            #container {
-              width: 1080px;
-              margin: 10px auto;
-            }
-            #helper {
-              width: 270px;
-              height: 650px;
-              margin-bottom: 20px;
-              float: left;
-              border: 1px solid #bcbcbc;
-              background-color: white;
-            }
-            #game {
-              width: 540px;
-              height: 650px;
-              padding: 20px;
-			        float: left;
-              border: 1px solid #bcbcbc;
-			        background-color: #3a536c;
-			        text-align: center;
-            }
-			
-			
-            #counter {
-              width: 270px;
-              height: 650px;
-              margin-bottom: 20px;
-              float: right;
-              border: 1px solid #bcbcbc;
-              background-color: white;
-            }
-            #footer {
-                clear: both;
-				        height: 50px;
-                padding: 20px;
-                border: 1px solid #bcbcbc;
-                background-color: white;
-            }
-            @media ( max-width: 720px ) {
-              #container {
-                width: auto;
-              }
-              #helper {
-                float: none;
-                width: auto;
-              }
-              #game {
-                float: none;
-                width: auto;
-              }
-              #counter {
-                float: none;
-                width: auto;
-              }
-            }
-			
-    </style>
+	
+	</style>
 </head>
-<body style="background-color: whitesmoke;">
-    <div id="container">
-        <div id="helper" style="overflow-x: hidden; overflow-y: auto; width: 270px; height: 650px;">
-		<!--헬퍼 상단 분홍 바 부분임. 연철이가 본인 helper.html 코드에 추가 바람--> 
-			<div style="width: 270px; height: 50px; background-color: #f6c6c6">
-			</div> 
-        </div>
-        <div id="game"> 
-        </div>
-        <div id="counter" style="overflow-x: hidden; overflow-y: auto; width: 270px; height: 650px">
-        </div>
-        <div id="footer">
-                <p>Copyright by us</p>
-        </div>
-    </div>
+<body>
+<div style="text-align: center; margin-top: 250px">
+<p style="color: #3a536c; font-size: 30px">Blackjack</p>
+<button onclick="window.location.href='player1.html'">Player 1</button>
+<button onclick="window.location.href='player2.html'">Player 2</button>
+<p style="color: #3a536c;">Select the position you want</p>
+</div>
+
 </body>
 </html>

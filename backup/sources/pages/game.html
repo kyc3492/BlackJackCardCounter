@@ -13,12 +13,24 @@
 	var dealercard = [];
 	var previous_fund = 0;
 	var available_funds = 1000;
+	var usernum = 0;
 
 	var socket = io.connect();
 
 	$(document).ready(function(){
 		var isOpened = false;
+		
+		//유저 인수 받기 
+		socket.on('ready', function(data){
+		   console.log("ready");
+		});
+		
+		socket.on('usernum', function(data){
+			usernum = data;
+			console.log(usernum);
+		});
 
+		//베팅 버튼 클릭시
 		$('#bet_button').click(function(){
 			$('#card_back').remove();
 			$('.card').remove();
@@ -37,7 +49,7 @@
 				console.log(playercard, dealercard);
 				isOpened = true;
 				//카드 공개 끝
-
+ 
 				previous_fund = data.fund;
 				$('#available_funds').text(data.fund);
 			});
@@ -113,6 +125,12 @@
 				$('#available_funds').text(available_funds);
 			});
 		});
+
+		//연결해제시 새로고침
+        socket.on('disconnect', function(data){
+			console.log("Disconnected");
+			window.location.reload();
+        });
 
 	});
 

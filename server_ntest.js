@@ -6,31 +6,38 @@ var card = require('./cards.js');
 
 var app = express();
 
-
-
-
 app.use(express.static('backup'));
 
 var server = http.createServer(app);
+var count = 0;
+count++;
+/*
+server.getConnections(function(error, count){
+    console.log(count);
+});
+*/
 server.maxConnections = 2;
 
 server.listen(52273, function () {
-    console.log('server running at http://127.0.0.1:52273/%27');
+    console.log('server running at http://127.0.0.1:52273');
 });
 app.get('/', function (request, response) {
-
     fs.readFile('index.html', function (error, data) {
         response.send(data.toString());
     });
 });
 
+app.get('/fdata', function(request, response, next){
+    response.send(fdata);
+});
+
 var fdata = new Object();
 function fdata_initializer(){
-    fdata.fund = 1000;
-    fdata.bet = 0;
-    fdata.countinfo = [];
-    fdata.playercard = [];
+    fdata.fund = [1000,1000];
+    fdata.bet = [];
+    fdata.playercard = [[],[]];
     fdata.dealercard = [];
+    //fdata.usernum = 0;
 }
 
 fdata_initializer();
@@ -45,39 +52,41 @@ var pBursted = [];
 var dealerTotal = 0;
 var dBursted = 0;
 
-var count = 0
-var usernum = 0
 
 var io = socketio.listen(server);
 io.sockets.on('connection', function (socket) {
-    usernum = count;
-    io.sockets.emit('usernum', usernum); // 보낸 usernum을 프론트에서 저장
-    //반드시 프론트에서 보내는 데이터에 usernum을 포함
-    count++;
+    fdata.usernum = count;
+    //io.sockets.emit('usernum', usernum); // 보낸 usernum을 프론트에서 저장
+    //반드시 프론트에서 보내는 데이터에 usernum을 포함.
     //playercard[usernum] //여기다 카드집어넘, 2차원배열
     console.log("user++: "+ count);
+    io.sockets.emit('usernum', fdata.usernum); // 보낸 usernum을 프론트에서 저장
 
     if(count=2){
-        io.sockets.emit('ready', 'ready');
-
+        io.sockets.emit('ready');
     };
-    socket.on('disconnect', function(){
-        count--;
-        console.log("user--: "+ count);
-        io.sockets.emit('disconnected','disconnected');//disconnected가 오면 프론트에서 새로고침을 누름.
-        // 새로고침을 누르면 커넥션이 끊기고 다시 연결됨
-        // 새로고쳐질때마다 player fund값 1000으로 초기화
-    });
 
     socket.on('game_start',function(data){
-        reset();
+        console.log(data);
+        usernum = parseInt(data.usernum);
+        bet = parseInt(data.your_bet);
         //이거 data 파라미터 제대로 인식되는지 확인좀
-        fdata.bet[data.usernum] = data.bet;
-        fdata.fund[data.usernum] = fdata.fund[data.usernum] - data.bet;
+        fdata.bet[usernum] = bet;
+        fdata.fund[usernum] = fdata.fund[usernum] - fdata.bet[usernum];
         deck = card.shuffle(card.deck);
         fdata.dealercard = [deck.shift(), deck.shift()];
-        fdata.playercard[data.usernum] = [deck.shift(), deck.shift()];
-        calculater(data.usernum);   // 요기 유저num을 넣어서 해당되는 playercard만 계산
+        
+        //fdata.playercard[usernum] = [deck.shift(), deck.shift()];
+        strPlayercard = JSON.stringify(fdata.playercard[usernum]);
+        console.log(strPlayercard);
+        strPlayercard = "[" + JSON.stringify(deck.shift()) + "," + JSON.stringify(deck.shift()) + "]";
+        fdata.playercard[usernum] = JSON.parse(strPlayercard);
+        console.log(strPlayercard);
+
+        calculater(usernum);   // 요기 유저num을 넣어서 해당되는 playercard만 계산
+        //fdata.usernum = usernum;
+        
+        console.log(fdata);
         io.sockets.emit('game_start', fdata);
     });
     socket.on('hit',function (data){
@@ -123,6 +132,10 @@ io.sockets.on('connection', function (socket) {
         io.sockets.emit('stand', fdata);
      });
 
+    socket.on('disconnect', function(data){
+        count = 0;
+        io.sockets.emit('disconnect');
+    });
     //socket.on('hit',1); 
     //socket.on('stand',2);
 
@@ -161,10 +174,10 @@ io.sockets.on('connection', function (socket) {
      };
 
      function reset(){
-        fdata.playercard = []
-        fdata.dealercard = []
-        playerTotal = [];
-        pBursted = [];
+        fdata.playercard = [];
+        fdata.dealercard = [];
+        playerTotal = [0, 0];
+        pBursted = [0, 0];
         dealerTotal = 0;
         dBursted = 0;
         console.log(fdata.playercard);
