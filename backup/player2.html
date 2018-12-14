@@ -41,7 +41,10 @@
 			$('.card').remove();
 
 			var your_bet = parseInt(document.getElementById("your_bet").value);
-			socket.emit('game_start', your_bet);
+			socket.emit('game_start', {
+				your_bet: your_bet, 
+				usernum: usernum
+			});
 			console.log(your_bet + " SEND!");
 			//console.log(fdata);
 			$.getJSON('/fdata', function(data){

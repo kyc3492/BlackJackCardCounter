@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Login</title>
+	<script>
+	</script>
+	<style>
+	
+	button{
+	
+  background:#3a536c;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:60px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#3a536c;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #3a536c;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+	
+	</style>
+</head>
+<body>
+<div style="text-align: center; margin-top: 250px">
+<p style="color: #3a536c; font-size: 30px">Blackjack</p>
+<button onclick="window.location.href='player1.html'">Player 1</button>
+<button onclick="window.location.href='player2.html'">Player 2</button>
+<p style="color: #3a536c;">Select the position you want</p>
+</div>
+
+</body>
+</html>
